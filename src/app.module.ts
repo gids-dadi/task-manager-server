@@ -1,16 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { ControllerModule } from './controller/controller.module';
-import { ServiceModule } from './service/service.module';
+import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
-import { TaskController } from './task/task.controller';
 
 @Module({
-  imports: [UsersModule, AuthModule, ControllerModule, ServiceModule, TasksModule],
-  controllers: [AppController, TaskController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'nesttasks',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    AuthModule,
+    UsersModule,
+    TasksModule,
+  ],
 })
 export class AppModule {}
