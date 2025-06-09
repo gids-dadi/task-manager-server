@@ -10,10 +10,21 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signup(email: string, password: string) {
+  async signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+  ) {
     const hashed = await bcrypt.hash(password, 10);
-    const user = await this.usersService.createUser(email, hashed);
-    return this.login(user);
+    const user = await this.usersService.createUser(
+      firstName,
+      lastName,
+      email,
+      hashed,
+    );
+    const { password: _, ...safeUser } = user;
+    return safeUser;
   }
 
   async login(user: any) {
