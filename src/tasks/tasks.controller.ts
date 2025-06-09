@@ -8,11 +8,13 @@ import {
   Param,
   Put,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Controller('tasks')
 @UseGuards(JwtAuthGuard)
@@ -30,12 +32,16 @@ export class TasksController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: CreateTaskDto, @Req() req: any) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateTaskDto,
+    @Req() req: any,
+  ) {
     return this.service.update(+id, dto, req.user.userId);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string, @Req() req: any) {
+  delete(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
     return this.service.delete(+id, req.user.userId);
   }
 }
