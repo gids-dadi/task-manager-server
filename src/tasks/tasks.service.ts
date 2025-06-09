@@ -18,10 +18,6 @@ export class TasksService {
     return this.repo.find({ where: { user: { id: userId } } });
   }
 
-  findOne(id: number, userId: number) {
-    return this.repo.findOne({ where: { id, user: { id: userId } } });
-  }
-
   update(id: number, dto: Partial<CreateTaskDto>, userId: number) {
     return this.repo.update({ id, user: { id: userId } }, dto);
   }
