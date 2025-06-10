@@ -20,11 +20,15 @@
 npm build
 ```
 
+## Authors
+
+👤 **Gideon Dadi**
+
+- Linkedin [@GideonDadi](www.linkedin.com/in/gideon-akamisoko-dadi)
+- GitHub: [@gids_dadi](https://github.com/gids-dadi)
+- Twitter: [@Dadi_AG](https://twitter.com/Dadi_AG)
+
 ## Task Mangert API
-
-### Overview
-
-Robust event booking and waitlist management system with features for ticket allocation, priority-based waitlisting, and dynamic event capacity tracking.
 
 ### Key Features
 
