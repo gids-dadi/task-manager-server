@@ -42,7 +42,28 @@ export class TasksService {
     return updatedTask;
   }
 
-  delete(id: number, userId: number) {
-    return this.repo.delete({ id, user: { id: userId } });
+  async delete(id: number, userId: number) {
+    // First, check if task exists and get its details
+    const taskToDelete = await this.repo.findOne({
+      where: { id, user: { id: userId } },
+    });
+
+    if (!taskToDelete) {
+      throw new NotFoundException(
+        'Task not found or you do not have permission to delete it',
+      );
+    }
+
+    // Delete the task
+    await this.repo.delete({ id, user: { id: userId } });
+
+    return {
+      message: 'Task deleted successfully',
+      deletedTask: {
+        id: taskToDelete.id,
+        title: taskToDelete.title,
+        deletedAt: new Date(),
+      },
+    };
   }
 }
