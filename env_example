@@ -1,0 +1,11 @@
+# Environment variables for the Task Manager application
+# Database configuration
+
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+JWT_SECRET=
+JWT_EXPIRES_IN=1h
+PORT=

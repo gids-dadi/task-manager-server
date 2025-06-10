@@ -19,11 +19,6 @@ export class TasksService {
     return this.repo.find({ where: { user: { id: userId } } });
   }
 
-  // update(id: number, dto: Partial<UpdateTaskDto>, userId: number) {
-  //   const updatedTask = this.repo.update({ id, user: { id: userId } }, dto);
-  //   return updatedTask;
-  // }
-
   async update(id: number, dto: Partial<UpdateTaskDto>, userId: number) {
     // First, update the task
     await this.repo.update({ id, user: { id: userId } }, dto);
